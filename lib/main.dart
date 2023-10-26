@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:homefy/core/theme/application_theme.dart';
 import 'package:homefy/pages/login_screen/login_screen.dart';
 import 'package:homefy/pages/onBoarding_screens/on_boarding_screens.dart';
+import 'package:homefy/pages/register_screen.dart';
 import 'package:homefy/pages/splash_screen/splash_screen.dart';
 
 void main() {
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName: (context) => const SplashScreen(),
         OnBoarding.routeName: (context) => const OnBoarding(),
         LoginScreen.routeName: (context) => const LoginScreen(),
+        RegisterScreen.routeName: (context) => const RegisterScreen(),
       },
     );
   }

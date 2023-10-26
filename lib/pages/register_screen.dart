@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:homefy/core/theme/application_theme.dart';
-import 'package:homefy/pages/register_screen.dart';
+import 'package:homefy/pages/login_screen/login_screen.dart';
 import 'package:homefy/widgets/custom_button.dart';
 import 'package:homefy/widgets/custom_text_field.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-  static const String routeName = "Login";
+class RegisterScreen extends StatelessWidget {
+  static const String routeName = "Register";
+  const RegisterScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-bool isRemember = true;
-
-class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -26,12 +19,16 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           Spacer(),
           const Text(
-            "Login",
+            "Sign Up",
             style: TextStyle(fontSize: 50),
           ),
           Image.asset('assets/images/vector1.png'),
           SizedBox(
             height: size.height * 0.05,
+          ),
+          CustomTextField(
+            labelText: 'Username',
+            isPassword: false,
           ),
           CustomTextField(
             labelText: 'Email Address',
@@ -41,35 +38,13 @@ class _LoginScreenState extends State<LoginScreen> {
             labelText: 'Password',
             isPassword: true,
           ),
-          Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isRemember = !isRemember;
-                  });
-                },
-                child: Icon(
-                  isRemember ? Icons.toggle_off_sharp : Icons.toggle_on_sharp,
-                  size: 70,
-                  color:
-                      isRemember ? ApplicationTheme.primaryColor : Colors.grey,
-                ),
-              ),
-              const Text(
-                'Remember me',
-                style: TextStyle(),
-              ),
-              const Spacer(),
-              TextButton(
-                onPressed: () {},
-                child: Text('Forget Password?'),
-              ),
-            ],
+          CustomTextField(
+            labelText: 'Confirm Password',
+            isPassword: true,
           ),
           Spacer(),
           CustomButton(
-            text: 'Login',
+            text: 'Sign UP',
           ),
           SizedBox(
             height: size.height * 0.05,
@@ -87,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: Text(
-                  'OR Login with',
+                  'OR Sign up with',
                   style: TextStyle(color: Colors.grey.shade600),
                 ),
               ),
@@ -113,19 +88,19 @@ class _LoginScreenState extends State<LoginScreen> {
               Image.asset('assets/images/twitter.png'),
             ],
           ),
-          Spacer(),
+          const Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Don\'t  have an account?',
+              const Text(
+                'Already have an account?',
                 style: TextStyle(fontSize: 16),
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, RegisterScreen.routeName);
+                  Navigator.pushNamed(context, LoginScreen.routeName);
                 },
-                child: Text('Sign Up'),
+                child: const Text('Sign in'),
               ),
             ],
           ),
