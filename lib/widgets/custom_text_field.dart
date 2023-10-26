@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatefulWidget {
   CustomTextField(
-      {super.key, required this.labelText, required this.isPassword});
+      {required this.labelText,
+      required this.isPassword,
+      this.isEmail = false});
   final String labelText;
   bool isPassword = false;
+  final bool isEmail;
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -17,6 +20,21 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16),
       child: TextFormField(
+        validator: (String? value) {
+          if (widget.isEmail) {
+            final emailRegExp =
+                RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)*(\.[a-z]{2,4})$');
+            if (!emailRegExp.hasMatch(value!)) {
+              return 'Please enter a valid email address';
+            } else if (value.isEmpty) {
+              return 'Enter some text please';
+            }
+          } else if (widget.isPassword && value!.length < 8) {
+            return 'Password must be at least 8 characters';
+          }
+
+          return null;
+        },
         keyboardType: TextInputType.emailAddress,
         obscureText: widget.isPassword && !showPwd,
         decoration: InputDecoration(

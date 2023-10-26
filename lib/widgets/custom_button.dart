@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:homefy/core/theme/application_theme.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, required this.text});
+  CustomButton({super.key, required this.text, required this.onPressed});
   final String text;
+  void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +25,7 @@ class CustomButton extends StatelessWidget {
             minimumSize: MaterialStateProperty.all<Size>(Size(211, 67)),
             backgroundColor: MaterialStateProperty.all<Color>(
                 ApplicationTheme.primaryColor)),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(
           text,
           style: const TextStyle(
